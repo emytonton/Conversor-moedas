@@ -1,7 +1,33 @@
-import React from "react";
+import {React, useState, useEffect} from "react";
 import { View, Text, StyleSheet } from "react-native";
 import PickerItem from "./src/Picker";
+import { api } from "./src/services/api";
+
+
 export default function App(){
+
+  useEffect( () => {
+    async function  loadMoedas() {
+      const response = await api.get('all')
+      let arrayMoedas = [];
+      Object.keys.apply(response.data).map((key) =>  {
+        arrayMoedas.push({
+          key: key,
+          label: label,
+          value: key
+        })
+      })
+    }
+
+    loadMoedas();
+
+  },[])// arry de componentes vazio, significa que eçe vai chamar a função assim q o app rodar
+
+
+
+
+
+
   return(
     <View style = {styles.container}>
       <View style = {styles.areaMoeda}>
